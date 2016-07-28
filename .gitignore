@@ -1,0 +1,591 @@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<script src="~/Scripts/angular-app/exception/instance-details.js"></script>*@
+
+<style type="text/css">
+    /*table {
+            border: 1px solid #000;
+        }*/
+
+    DIV.LightBlueBorder {
+        border: thick;
+        border-color: green;
+    }
+
+    td, th {
+        border: none;
+    }
+
+    #light {
+        overflow: hidden;
+        padding: 0 0 4px;
+        width: 40px;
+    }
+
+        #light span {
+            border-radius: 50px;
+            display: block;
+            height: 15px;
+            margin: 4px auto 0;
+            opacity: .5;
+            width: 15px;
+        }
+
+    #biggerLight span {
+        border-radius: 100px;
+        display: block;
+        height: 15px;
+        margin: 4px auto 0;
+        opacity: .5;
+        width: 15px;
+    }
+
+    /*! Light colours */
+    #red {
+        background-color: red;
+    }
+
+    #orange {
+        background-color: orange;
+    }
+
+    #green {
+        background-color: green;
+    }
+
+    /*! Active states */
+    #light span.active {
+        opacity: 1;
+    }
+
+    #light #red.active {
+        box-shadow: 0 0 0px red;
+        /*border: 5px solid red;*/
+        border: 5px solid red;
+    }
+
+    #light #orange.active {
+        box-shadow: 0 0 0px orange;
+        border: 5px solid orange;
+    }
+
+    #light #green.active {
+        box-shadow: 0 0 0px green;
+        border: 5px solid green;
+    }
+
+    /*! Toggle button */
+    button {
+        margin-top: 10px;
+    }
+
+    table.HeaderTableStyle {
+        background-color: #CDDFE8;
+        border: thin;
+    }
+
+    p.Italic {
+        font-weight: bold;
+        font-style: italic;
+        font-size: 14px;
+    }
+
+    p.Underlined {
+        text-decoration: underline;
+    }
+
+    .BackGroundRed {
+        background-color: red;
+    }
+
+    .BackGroundGreen {
+        background-color: green;
+    }
+
+    .BackGroundAmber {
+        background-color: orange;
+    }
+    /*td {
+        background-color: #D5E5EC;
+        overflow: visible;
+    }*/
+
+    th {
+        border: thin;
+        background-color: #CBDFE7;
+        overflow: visible;
+    }
+
+    .table {
+        padding: 1px,;
+    }
+
+    th.DashBoardHeader {
+        background-color: #548CA0;
+        width: 2000px;
+        height: 40px;
+    }
+
+    th.InstanceHeader {
+        background-color: #CBDFE7;
+        width: 2000px;
+        height: 40px;
+    }
+
+
+    p.IncreasedFont {
+        font-size: 40px;
+    }
+
+    td.NoPadding {
+        padding: 0;
+    }
+
+    .blank_row {
+        height: 10px !important; /* Overwrite any previous rules */
+        background-color: #FFFFFF;
+    }
+
+    table.ModuleBorder, th.ModuleBorder, td.ModuleBorder {
+        border: 1px solid black;
+        border-collapse: separate;
+        border-spacing: 5px;
+    }
+
+
+    DIV.stack-vert {
+        /*border: solid thick red;*/
+        overflow: hidden;
+    }
+
+    DIV.stack-horz {
+        /*border: solid thick blue;*/
+        overflow: hidden;
+    }
+
+    DIV.content {
+        padding: 5px;
+        /*background-color: grey;*/
+        margin: 5px;
+    }
+
+    DIV.stack-horz > DIV.content {
+        float: left;
+    }
+
+    DIV.BorderRedForModulesImpacted {
+        border: 5px solid red;
+        border-spacing: 10px 50px;
+    }
+
+    DIV.HiddenVisiblity {
+        visibility: hidden;
+    }
+
+    .row {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+    }
+
+        .row > [class*='col-'] {
+            flex-direction: column;
+        }
+
+
+    DIV.green {
+        background-color: green;
+    }
+
+    DIV.orange {
+        background-color: orange;
+    }
+
+    DIV.red {
+        background-color: red;
+    }
+
+    .a {
+        color: black;
+    }
+
+    .Red {
+        color: red;
+    }
+
+    .Orange {
+        color: orange;
+    }
+
+    .Green {
+        color: Green;
+    }
+
+
+    DIV.ThickBorderGreen {
+        border-color: green;
+        border-style: solid;
+        border-width: thick;
+    }
+
+    DIV.ThickBorderOrange {
+        border-color: green;
+        border-style: solid;
+        border-width: thick;
+    }
+
+    DIV.ThickBorderRed {
+        border-color: green;
+        border-style: solid;
+        border-width: thick;
+    }
+
+    .row.equalheights {
+        overflow: hidden;
+    }
+
+        .row.equalheights > [class*="col-"] {
+            margin-bottom: -99999px;
+            padding-bottom: 99999px;
+        }
+
+    em.WhiteAndBold {
+        font-weight: bold;
+        color: white;
+    }
+    .equal {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .equal > div[class*='col-'] {
+            display: flex;
+            flex-direction: column;
+        }
+
+</style>
+
+
+<div ng-app="starsapp">
+    <div ng-controller="ExceptionDetailsCtrl">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <em>Run Dashboard Overview</em>
+                </h3>
+            </div>
+            <div class="panel-body" style="border: 1px thick;">
+                <div class="container-fluid">
+                    <div class="row row-eq-height">
+
+                        <div class="col-xs-2">
+                            <div class="panel panel-default">
+
+
+                                <div class="panel-heading"
+                                     ng-style="{'background-color': InstanceDetailsResponse.InstanceRunDetails.ErrorState=='Success' ? 'green' :InstanceDetailsResponse.InstanceRunDetails.ErrorState=='Error' ? 'red' :'orange'}"
+                                     @*style="background-color:green">*@>
+                                    <h3 class="panel-title ">
+                                        <em class="WhiteAndBold"><strong>Instance Run</strong></em>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <span><strong>Start Date:</strong></span>
+                                    <span>{{InstanceDetailsResponse.InstanceRunDetails.StartDate}}</span><br />
+                                    <span><strong>End Date:</strong></span>
+                                    <span>{{InstanceDetailsResponse.InstanceRunDetails.EndDate}}</span><br />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-2">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"
+                                     ng-style="{'background-color': InstanceDetailsResponse.InstanceCheckDetails.ErrorState=='Success' ? 'green' :InstanceCheckDetails.InstanceRunDetails.ErrorState=='Error' ? 'red' :'orange'}">
+                                    <h3 class="panel-title">
+                                        <em class="WhiteAndBold">Instance Checks</em>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <span><strong>Start Date:</strong></span>
+                                    <span>{{InstanceDetailsResponse.InstanceCheckDetails.StartDate}}</span><br />
+                                    <span><strong>End Date:</strong></span>
+                                    <span>{{InstanceDetailsResponse.InstanceCheckDetails.EndDate}}</span><br />
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-2">
+                            <div class="panel" id="InstanceHeader">
+                                @* class panel-default will add border can remve this to ignore the border*@
+                                <div class="panel-body">
+                                    <table>
+                                        <tr>
+                                            <td><strong>InstanceID</strong></td>
+                                            <td><strong>:</strong></td>
+                                            <td>{{InstanceDetailsResponse.InstanceID}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>InstanceName</strong></td>
+                                            <td><strong>:</strong></td>
+                                            <td>{{InstanceDetailsResponse.InstanceName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Basis</strong></td>
+                                            <td><strong>:</strong></td>
+                                            <td>{{InstanceDetailsResponse.Basis}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>LastUpdatedBy</strong></td>
+                                            <td><strong>:</strong></td>
+                                            <td>{{InstanceDetailsResponse.LastUpdatedBy}}</td>
+                                        </tr>
+                                        <tr></tr>
+                                    </table>
+                                    <div id="AccountList">
+                                        <table class="ModuleBorder">
+                                            <tr>
+                                                <td style="border-left:none;border-top:none;border-bottom:none">Account</td>
+                                                <td style="width:20px" class="ModuleBorder" ng-repeat="Account in InstanceDetailsResponse.ListOfAccounts">{{Account}}</td>
+                                            </tr>
+
+                                            @*<tr></tr>
+                                                <tr ng-repeat="module in students.ListOfModules">
+                                                    <td class="ModuleBorder">{{module}}</td>
+                                                </tr>*@
+                                        </table>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-xs-1">
+                            <span><strong>Modules</strong></span>
+                            <div class="panel panel-default" id="InstanceHeader">
+                                @*border starts here*@
+                                <div class="panel-body">
+                                    <div ng-repeat="module in InstanceDetailsResponse.ListOfModules">
+                                        <span>
+                                            @* removed the style  style="border:1px solid;width:200px"*@
+                                            {{module.ModuleName}}
+                                        </span>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-1">
+                            @*border starts here*@
+                            <button class="btn btn-primary Underlined col-xs-12"><i>View Data Element</i></button><br />
+                            <button class="btn btn-primary Underlined col-xs-12"><i>Copy Instance</i></button><br />
+
+                        </div>
+                    </div>
+
+                    <div class="row row-eq-height">
+                        <div class="panel panel-default col-xs-12">
+
+                            <br />
+                            <div class="col-xs-2" ng-repeat="InstanceDetail in InstanceDetailsResponse.InstanceExceptionLogTypes">
+
+                                <div class="panel panel-default"
+                                     @*ng-class="InstanceDetail.ErrorState=='Success' ? 'ThickBorderGreen' :InstanceDetail.ErrorState=='Error' ? 'ThickBorderRed' :'ThickBorderOrange'"*@>
+                                    <div class="panel-heading"
+                                         ng-style="{'background-color': InstanceDetail.ErrorState=='Success' ? 'green' :InstanceDetail.ErrorState=='Error' ? 'red' :'orange'}"
+                                         @*style="background-color:green" *@>
+                                        <h3 class="panel-title">
+                                            <em class="WhiteAndBold">{{InstanceDetail.Level1Name}}</em>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body" style="height:200px">
+                                        <div ng-repeat="Level1Item in InstanceDetail.InstanceExceptionLog">
+                                            <span>
+                                                <a class="{{Level1Item.ErrorState=='Success' ? 'Green' :Level1Item.ErrorState=='Error' ? 'Red' :'Orange' }}" href="" ng-click="RefreshInstanceExceptionTypes($index, $parent.$index)">
+
+                                                    {{Level1Item.Name}}
+                                                </a>
+                                            </span>
+                                            <br />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <br />
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    @*Check & Check Details*@
+
+                    <div class="row row-eq-height">
+                        <div class="panel panel-default col-xs-12">
+
+                            <br />
+                            @*#Check*@
+                            <div class="col-xs-5">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                            <em class="whiteandbold">Data Checks</em>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="col-xs-12" id="Check">
+                                            @*Column for Check*@
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <em>Data Extraction</em>
+                                                        @*<em ><p style="text-align:right ">Modules Impacted</p></em>*@
+                                                    </h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="row" ng-repeat="exceptionLog in ExceptionLogs">
+                                                        <div class="panel-body col-xs-3">
+                                                            <a href="" ng-click="RefreshExceptionDetail($index, $parent.$index)">
+                                                                {{exceptionLog.Name}}
+                                                            </a>
+                                                        </div>
+                                                        <div class="panel-body col-xs-1">
+                                                            <div id="light">
+                                                                <span ng-attr-id="{{exceptionLog.ErrorState=='Success' ? 'green' :exceptionLog.ErrorState=='Error' ? 'red' :'orange' }}"
+                                                                      class="active"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-body col-xs-1" ng-repeat="module in InstanceDetailsResponse.ListOfModules">
+                                                            <div ng-class="{{module.ModuleShortName=='CP' ? 'ThickBorderGreen':'ThickBorderRed'}}">{{module.ModuleShortName}}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*Check Details*@
+                            <div class="col-xs-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title row">
+                                            <em class="col-xs-6">Bench Mark Currencies Weight Validation -DC</em>
+                                            <em class="col-xs-2">
+                                                <input type="button" class="btn btn-primary" value="Input Remarks" />
+                                            </em>
+                                            <em class="col-xs-2"><input type="button" class="btn btn-primary col-xs-12" value="Export" /></em>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body" style="height:273px">
+                                        <div class="col-xs-12" id="Check">
+                                            @*Column for Check details*@
+
+                                            
+                                                @*<div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        <em>Check Details</em>
+
+
+
+                                                    </h3>
+                                                </div>*@
+                                                <div class="panel-body">
+
+
+                                                    <div id="BenchMarkAndCurrencies" class="content">
+                                                        <table style="outline: 0.5px solid grey; width: 350px;" cellspacing="1" cellpadding="1">
+                                                            <tr style="border-bottom:dotted thin">
+                                                                <th style="width: 70px; background-color: #D9D9D9;">BenchMark</th>
+                                                                <th style="width: 70px; background-color: #D9D9D9;">Invalid Currencies</th>
+                                                            </tr>
+                                                            <tbody ng-repeat='LogErrorDetails in ExceptionDetailLogs.ExceptionLogDetailsErrors'>
+                                                                <tr style="outline:0.5px solid grey">
+                                                                    <td style="width: 70px; outline: 0.5px solid grey; background-color: none">{{LogErrorDetails.ErrorLogName}}</td>
+                                                                    <td style="width: 70px; background-color: none">
+                                                                        <table>
+                                                                            <tr ng-repeat='item in LogErrorDetails.ErrorLogDetails'>
+                                                                                <td style="width: 350px; border-bottom: dotted thin; background-color: none;">&nbsp;{{item}}</td>
+                                                                                <td>
+                                                                                    <table>
+                                                                                        <tr ng-repeat='zip in county.zips'>
+                                                                                            <td>{{zip}}</td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            @*Level 1 Details*@
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    @*changes with new design*@
+
+
+
+
+
+
+
+
